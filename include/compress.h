@@ -6,7 +6,7 @@ typedef struct {
     long long int length;
 }raw_t;
 
-typedef struct{
+typedef struct {
     char** data;
     long long int length;
 }processed_t;

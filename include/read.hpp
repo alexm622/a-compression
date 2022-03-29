@@ -7,7 +7,7 @@
 
 class Read{
     public:
-        static std::optional<raw_t> read(char* fname);
+        static std::optional<raw_t*> read(char* fname);
 
     private:
 };
