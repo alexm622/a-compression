@@ -1,0 +1,54 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=c++17",
+      "-pedantic-errors",
+      "-Wall",
+      "-Wextra",
+      "-Wshadow",
+      "-Wswitch-enum",
+      "-Wstack-protector",
+      "-Wdate-time",
+      "-Walloc-zero",
+      "-Walloca",
+      "-DDEBUG",
+      "-g",
+      "-Iinclude/",
+      "-I/usr/local/include",
+      "-c",
+      "-o",
+      "build/objects/src/read.o",
+      "src/read.cpp"
+    ],
+    "directory": "/home/alex/git/a-comp",
+    "file": "/home/alex/git/a-comp/src/read.cpp",
+    "output": "/home/alex/git/a-comp/build/objects/src/read.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=c++17",
+      "-pedantic-errors",
+      "-Wall",
+      "-Wextra",
+      "-Wshadow",
+      "-Wswitch-enum",
+      "-Wstack-protector",
+      "-Wdate-time",
+      "-Walloc-zero",
+      "-Walloca",
+      "-DDEBUG",
+      "-g",
+      "-Iinclude/",
+      "-I/usr/local/include",
+      "-c",
+      "-o",
+      "build/objects/src/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/home/alex/git/a-comp",
+    "file": "/home/alex/git/a-comp/src/main.cpp",
+    "output": "/home/alex/git/a-comp/build/objects/src/main.o"
+  }
+]
