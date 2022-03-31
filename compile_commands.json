@@ -21,8 +21,60 @@
       "build/objects/src/compress.o",
       "src/compress.cpp"
     ],
-    "directory": "/home/alex/git/a-comp",
-    "file": "/home/alex/git/a-comp/src/compress.cpp",
-    "output": "/home/alex/git/a-comp/build/objects/src/compress.o"
+    "directory": "/home/alex/git/a-compression",
+    "file": "/home/alex/git/a-compression/src/compress.cpp",
+    "output": "/home/alex/git/a-compression/build/objects/src/compress.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=c++17",
+      "-pedantic-errors",
+      "-Wall",
+      "-Wextra",
+      "-Wshadow",
+      "-Wswitch-enum",
+      "-Wstack-protector",
+      "-Wdate-time",
+      "-Walloc-zero",
+      "-Walloca",
+      "-DDEBUG",
+      "-g",
+      "-Iinclude/",
+      "-I/usr/local/include",
+      "-c",
+      "-o",
+      "build/objects/src/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/home/alex/git/a-compression",
+    "file": "/home/alex/git/a-compression/src/main.cpp",
+    "output": "/home/alex/git/a-compression/build/objects/src/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=c++17",
+      "-pedantic-errors",
+      "-Wall",
+      "-Wextra",
+      "-Wshadow",
+      "-Wswitch-enum",
+      "-Wstack-protector",
+      "-Wdate-time",
+      "-Walloc-zero",
+      "-Walloca",
+      "-DDEBUG",
+      "-g",
+      "-Iinclude/",
+      "-I/usr/local/include",
+      "-c",
+      "-o",
+      "build/objects/src/read.o",
+      "src/read.cpp"
+    ],
+    "directory": "/home/alex/git/a-compression",
+    "file": "/home/alex/git/a-compression/src/read.cpp",
+    "output": "/home/alex/git/a-compression/build/objects/src/read.o"
   }
 ]

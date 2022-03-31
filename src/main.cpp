@@ -14,17 +14,7 @@ int main(){
     }
     raw_t* data = data_o.value();
 
-    char* fdata = (char*) malloc(sizeof(char)*data->length + 1);
-    fdata = (char*) memcpy(fdata,data->data,sizeof(char) * data->length + 1);
-    //add null terminator
-    fdata[data->length]= '\0';
-    printf("data\n");
-    printf("--------------------------------\n");
-    for (int i = 0; i < data->length; i++) {
-        //test binary converter
-        
-    }
-    std::string temp = "az";
-    printf("%s", Compression::toBin(temp.data()));
+    Compression::compressed(data);
+
     return 1;
 }
