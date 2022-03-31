@@ -25,9 +25,9 @@ char* Compression::toBin(char *chars) {
     char* out = (char*) malloc(sizeof(char) * 16);
     n = chars[0];
     n = (n << 8) | chars[1];
-    printf("n: %d", n); 
-    for (i = 0; n > 0; i++) {
-        out[i] = n%2;
+    printf("n: %d\n", n); 
+    for (i = 15; i >= 0; i--) {
+        out[i] = (n%2 == 1)? '1' : '0';
         n /= 2;
     }
     return out;

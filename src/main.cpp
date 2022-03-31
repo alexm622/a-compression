@@ -1,9 +1,9 @@
-#include <stdio.h>
-
-#include <string.h>
-
 #include "read.hpp"
 
+#include <cstring>
+
+#include <stdio.h>
+#include <string>
 
 int main(){
     std::string fname = "test.txt";
@@ -21,7 +21,10 @@ int main(){
     printf("data\n");
     printf("--------------------------------\n");
     for (int i = 0; i < data->length; i++) {
-        printf("%x", data->data[i]);
+        //test binary converter
+        
     }
+    std::string temp = "az";
+    printf("%s", Compression::toBin(temp.data()));
     return 1;
 }

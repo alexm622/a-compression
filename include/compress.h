@@ -12,10 +12,11 @@ typedef struct {
 }processed_t;
 
 class Compression {
-    public:
-        static processed_t* compressed(raw_t* data);
-    private:
-        private char* toBin(char* chars);
+public:
+  static char *toBin(char *chars);
+  static processed_t *compressed(raw_t *data);
+
+private:
 };
 
 #endif
