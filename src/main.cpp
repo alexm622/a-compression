@@ -14,12 +14,14 @@ int main(){
     }
     raw_t* data = data_o.value();
 
-    char* fdata = (char*) malloc(sizeof(char));
+    char* fdata = (char*) malloc(sizeof(char)*data->length + 1);
     fdata = (char*) memcpy(fdata,data->data,sizeof(char) * data->length + 1);
     //add null terminator
     fdata[data->length]= '\0';
     printf("data\n");
     printf("--------------------------------\n");
-    printf("%s", fdata);
+    for (int i = 0; i < data->length; i++) {
+        printf("%x", data->data[i]);
+    }
     return 1;
 }

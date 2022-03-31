@@ -14,20 +14,32 @@ std::optional<raw_t*> Read::read(char* fname){
     raw_t* data = (raw_t*) malloc(sizeof(raw_t));
 
     data->length = 0;
-    std::ifstream file (fname);
-    if (file.is_open()) {
-      while (std::getline(file, line)) {
-          //add to the data format.
-          int len = line.length();
-          data->data = (char *) malloc(sizeof(char));
-          //data->data = (char*) malloc(sizeof(char));
-          for (int i = 0; i < len; i++) { //this is -1 because we don't want the null terminator
-            data->data = (char *) realloc(data->data, sizeof(char) * data->length + 1);
-            data->data[data->length + i] = line.data()[i];
-          }
-          data->length += len;
-      }
+    std::ifstream file;
+    file.open(fname, std::ios::binary | std::ios::in);
+    if (file) {
+        file.seekg(0, file.end);
+        int len =   file.tellg();
+        file.seekg(0, file.beg);
+        data->data = (char*) malloc(sizeof(char) * (len + 1));
+        printf("reading %i characters\n", len);
+        file.read(data->data, len);
+        data->length = len;
+
+        if (file) {
+            printf("all data read successfully\n");
+        } else {
+            printf("operation failed\n");
+            printf("going to try to read anyways\n");
+            printf("%s", data->data);
+            free(data->data);
+            free(data);
+            return {};
+        }
+    } else {
+        free(data);
+        return {};
     }
     file.close();
+    printf("data:\n%s", data->data);
     return std::optional<raw_t*>{data};
 }
