@@ -7,8 +7,15 @@ typedef struct {
 }raw_t;
 
 typedef struct {
-    char** data;
+    char* data;
     long long int length;
 }processed_t;
+
+class Compression {
+    public:
+        static processed_t* compressed(raw_t* data);
+    private:
+        private char* toBin(char* chars);
+};
 
 #endif
