@@ -14,6 +14,10 @@ int main(){
     }
     raw_t* data = data_o.value();
 
+    for (int i = 0; i < data->length; i++) {
+        printf("%u", data->data[i]);
+    }
+
     Compression::compressed(data);
 
     return 1;

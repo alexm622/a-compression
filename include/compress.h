@@ -16,9 +16,10 @@ typedef struct {
 class Compression {
 public:
   static uint8_t *toBin(const uint8_t *bytes);
-  static processed_t *compressed(raw_t *data, uint8_t constraint);
+  static uint8_t* toBinByte(const uint8_t byte);
+  static processed_t *compressed(raw_t *data);
 private:
-  static uint8_t compress(const uint8_t* buffer);
+  static uint8_t compress(const uint8_t* buffer, uint8_t constraint);
   static void write_data(processed_t* data, const uint8_t byte);
 };
 

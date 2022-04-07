@@ -10,7 +10,6 @@ std::optional<raw_t*> Read::read(char* fname){
     if (!access("fname", F_OK)) {
       return {};
     }
-    std::string line;
     raw_t* data = (raw_t*) malloc(sizeof(raw_t));
 
     data->length = 0;
@@ -20,10 +19,14 @@ std::optional<raw_t*> Read::read(char* fname){
         file.seekg(0, file.end);
         int len =   file.tellg();
         file.seekg(0, file.beg);
-        data->data = (char*) malloc(sizeof(char) * (len + 1));
+        data->data = (uint8_t*) malloc(sizeof(uint8_t) * (len + 1));
         printf("reading %i characters\n", len);
-        file.read(data->data, len);
-        data->length = len;
+        char* buffer = (char*) malloc(sizeof(char) * (len));
+        file.read(buffer, len);
+
+        for (int i = 0; i < len; i++) {
+            data->data[i] = (uint8_t) buffer[i];
+        }
 
         if (file) {
             printf("all data read successfully\n");

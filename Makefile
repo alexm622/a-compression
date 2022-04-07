@@ -16,7 +16,7 @@
 CXX      := g++
 WARNINGS= -Wall -Wextra -Wshadow -Wswitch-enum -Wstack-protector -Wdate-time -Walloc-zero -Walloca  
 CXXFLAGS := -std=c++17 -pedantic-errors $(WARNINGS)
-LDFLAGS  := /usr/lib/ftxui-component.a /usr/lib/ftxui-dom.a /usr/lib/ftxui-screen.a -L/usr/lib -lstdc++ -lm -lpthread
+LDFLAGS  :=  -L/usr/lib -lstdc++ -lm -lpthread
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps

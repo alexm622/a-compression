@@ -12,9 +12,9 @@
 
 
 processed_t *Compression::compressed(raw_t *data) { 
-    processed_t_t* return_value = (processed_t*) malloc(sizeof(processed_t_t));
+    processed_t* return_value = (processed_t*) malloc(sizeof(processed_t));
     
-    uint8_t* buffer = (uint8_t*) malloc(sizeof(uint8_t) * 16); //16 bits or 2 char
+    uint8_t* binary;
 
     bool ooz = false;
 
@@ -22,46 +22,53 @@ processed_t *Compression::compressed(raw_t *data) {
         ooz = ONE;
     }
 
-    int buf_offset = 0;
-    bool start_or_end = END
-    uint8_t curr;
+    int buf_offset = 0; // 
+    uint8_t comp_count = 0; // the number of bytes already compressed
+    return_value->length = 0;
+    return_value->data = (uint8_t*) malloc(sizeof(uint8_t));
+
+    if (ooz == ZERO) {
+        return_value->data[0] = 0;
+        return_value->length++;
+    }
+    uint8_t* buffer = (uint8_t*) malloc(sizeof(uint8_t) * 2);
+    buffer[0] = data->data[buf_offset];
+    buffer[1] = data->data[buf_offset+ 1];
+    binary = toBin(buffer);
+    buf_offset += 2;
+    uint8_t bit_offset = 0;
+
+
     while (true) {
-        //write to buffer
+        uint8_t* bin_buf;
+        printf("binary: ");
         for (int i = 0; i < 16; i++) {
-          buffer[i] = data->data[buf_offset + i];
+          printf("%c", binary[i]);
         }
-        if (buffer[0] == ooz) {
-            //enter a value of 0 for run length
-            curr = curr & 0x0f;
-            start_or_end = !start_or_end;
-            
+                buf_offset += 2;
+        uint8_t comp = compress(binary, 16);
+        printf("\ncompressed: %d\n", comp);
+        uint8_t count = comp >> 4;
+        printf("count: %d", count);
+
+        //ditch count bits from binary
+        for (int i = count; i < 16; i++) {
+            binary[i-count]=binary[i];
+        }
+        return_value->data = (uint8_t*) realloc(return_value->data, return_value->length + 1);
+        return_value->data[return_value->length] = comp;
+        return_value->length++;
+        
+        bit_offset += count;
+        while(bit_offset >= 8) {
+            bit_offset -= 8;
+            comp_count++;
         }
 
-        uint8_t comp = compress(toBin(buffer), 16);
-        start_or_end = !start_or_end;
-        ooz = !ooz;
-        if (start_or_end == START) {
-            curr = (comp & 0x0f) << 4;
-        } else {
-            curr = (comp & 0x0f);
-            write_data(return_value,curr);
-        }
-        buf_offset += comp & 0xf0 >> 4;
-        if (data->length - buf_offset < 16) {
-            break;
-        }
-    }
-    if(data->length - buf_offset != 0){
 
-    //cleanup/ending stuff
-    while (true) {
-        buffer = (uint8_t*) realloc(buffer, sizeof(uint8_t) * data->length - buf_offset);
+        break;
     }
-    } else {
-        free(buffer);
-    }
-
-    return {};
+    return return_value;
 }
 
 uint8_t* Compression::toBin(const uint8_t *bytes) {
@@ -76,6 +83,20 @@ uint8_t* Compression::toBin(const uint8_t *bytes) {
         n /= 2;
     }
     return out;
+}
+
+uint8_t* Compression::toBinByte(const uint8_t byte) {
+    int i;
+    int n = 0;
+    uint8_t* out = (uint8_t*) malloc(sizeof(uint8_t) * 8);
+    n = byte;
+    printf("n: %d\n", n); 
+    for (i = 7; i >= 0; i--) {
+        out[i] = (n%2 == 1)? '1' : '0';
+        n /= 2;
+    }
+    return out;
+
 }
 
 uint8_t Compression::compress(const uint8_t *buffer, uint8_t constraint) {
